@@ -13,15 +13,18 @@ The project began as a lightweight daily planner and evolved into a full ecosyst
 
 ---
 <p align="center">
-  <img width="763px" height="612" src="https://github.com/user-attachments/assets/b375526e-f9c6-44c5-adce-9e2114e5546a" />
+  <img width="812" height="612" alt="image" src="https://github.com/user-attachments/assets/aff65833-93b5-4708-be1b-76dd5f277ce0" />
+
 </p>
 
 <p align="center">
-  <img width="812" height="612" alt="image" src="https://github.com/user-attachments/assets/b2edcfcf-84a9-443e-9820-15512defd653" />
+  <img width="812" height="612" alt="image" src="https://github.com/user-attachments/assets/bcab6be7-98fb-4361-b5bc-60b873937f0f" />
+
 </p>
 
 <p align="center">
-  <img width="812" height="612" alt="image" src="https://github.com/user-attachments/assets/c04f3fac-7bfc-4d99-b455-eb3a8ded9641" />
+  <img width="812" height="612" alt="image" src="https://github.com/user-attachments/assets/ab9cc189-dd5b-48cb-8e0c-83abe70023ed" />
+
 </p>
 
 
