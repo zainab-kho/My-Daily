@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dashboard</title>
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+
+<body>
+  <div class="window">
+    <header>
+      <div class="page-buttons">
+        <button class="home">
+          <img src="../assets/home-icon.png" alt="home icon">
+        </button>
+        <button class="settings">
+          <img src="../assets/settings-icon.png" alt="settings icon">
+        </button>
+      </div>
+
+      <h1>dashboard</h1>
+
+      <div class="button-container">
+        <button class="minimize">
+          <img src="../assets/minimize-icon.png" alt="minimize">
+        </button>
+        <button class="close">
+          <img src="../assets/close-icon.png" alt="close">
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <div class="icons">
+        <div class="icon">
+          <button class="habit-tracker-icon">
+            <img src="../assets/habit-tracker-icon.png" alt="habit tracker icon">
+          </button>
+          <h4>habit tracker</h4>
+        </div>
+
+        <div class="icon">
+          <button class="to-do-list-icon">
+            <img src="../assets/to-do-list-icon.png" alt="to-do list icon">
+          </button>
+          <h4>to-do list</h4>
+        </div>
+
+        <!-- **TODO: change button class + src to journal -->
+        <div class="icon">
+          <button class="to-do-list-icon">
+            <img src="../assets/to-do-list-icon.png" alt="journal icon">
+          </button>
+          <h4>journal</h4>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="../js/window-controls.js"></script>
+  <script type="module" src="../js/dashboard.js"></script>
+
+  <script>
+    window.onload = function () {
+      window.resizeTo(700, 500);
+    }
+  </script>
+</body>
+
+</html>

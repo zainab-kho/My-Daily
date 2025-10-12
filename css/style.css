@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400&display=swap');
+
+* {
+    font-family: "Pixelify Sans";
+}
+
+:root {
+    --darkbackground: #80A187;
+    --border: #587765;
+    --lightbackground: #c3dcc8;
+    --lighterbackground: #d0e7d4;
+    --mediumbackground: #BED3C1;
+    --light: #F0FAF2;
+    --black: #000000;
+    --white: #FFFFFF;
+    --darkborder: 1.5px solid var(--border);
+}
+
+.strawberry-blossom-theme {
+    --darkbackground: #f599b0;
+    --border: #fb6f92;
+    --lightbackground: #ffd7e3;
+    --lighterbackground: #ffe5ec;
+    --mediumbackground: #FDC4D3;
+    --light: #fff7f9;
+    --black: #000000;
+    --white: #FFFFFF;
+    --darkborder: 1.5px solid var(--border);
+}
+
+.sunny-theme {
+    --darkbackground: #febf1e;
+    --border: #e99400;
+    --lightbackground: #ffd687;
+    --lighterbackground: #ffe1a8;
+    --mediumbackground: #f5ce82;
+    --light: #fff8ea;
+    --black: #000000;
+    --white: #FFFFFF;
+    --darkborder: 1.5px solid var(--border);
+}
+
+.default-theme {
+    --darkbackground: #80A187;
+    --border: #587765;
+    --lightbackground: #c3dcc8;
+    --lighterbackground: #d0e7d4;
+    --mediumbackground: #BED3C1;
+    --light: #F0FAF2;
+    --black: #000000;
+    --white: #FFFFFF;
+    --darkborder: 1.5px solid var(--border);
+}
+
+.cozy-theme {
+    --darkbackground: #c97c5d;
+    --border: #8e4235;
+    --lightbackground: #eed7c5;
+    --lighterbackground: #eee2df;
+    --mediumbackground: #eccab0;
+    --light: #f0edea;
+    --black: #000000;
+    --white: #FFFFFF;
+    --darkborder: 1.5px solid var(--border);
+}
+
+.coffee-theme {
+    --darkbackground: #ddb892;
+    --border: #9c6644;
+    --lightbackground: #e6ccb2;
+    --lighterbackground: #ede0d4;
+    --mediumbackground: #e2cfbd;
+    --light: #fff8f1;
+    --black: #000000;
+    --white: #FFFFFF;
+    --darkborder: 1.5px solid var(--border);
+}
+
+.forest-theme {
+    --darkbackground: #538970;
+    --border: #004733;
+    --lightbackground: #83a78e;
+    --lighterbackground: #a5c1ae;
+    --mediumbackground: #92b09b;
+    --light: #e3f4e8;
+    --black: #000000;
+    --white: #FFFFFF;
+    --darkborder: 1.5px solid var(--border);
+}
+
+.ocean-blue-theme {
+    --darkbackground: #628f9a;
+    --border: #396570;
+    --lightbackground: #89b0b9;
+    --lighterbackground: #9bbfc8;
+    --mediumbackground: #71af83;
+    --light: #e3eff4;
+    --black: #000000;
+    --white: #ffffff;
+    --darkborder: 1.5px solid var(--border);
+}
+
+.sweetener-theme {
+    --darkbackground: #f18d7d;
+    --border: #b7685a;
+    --lightbackground: #fbd4b2;
+    --lighterbackground: #fbb8a3;
+    --mediumbackground: #fdbf98;
+    --light: #fae8d1;
+    --black: #000000;
+    --white: #FFFFFF;
+    --darkborder: 1.5px solid var(--border);
+}
+
+.window {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: var(--darkbackground);
+}
+
+main {
+    position: absolute;
+    overflow: auto;
+    height: 89%;
+    inset: auto 10px 10px 10px;
+    flex-shrink: 0;
+    border: 3px solid var(--border);
+    background: var(--lighterbackground);
+}
+
+.main {
+    padding: 30px 40px 30px 40px;
+    margin: 0 auto;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--darkbackground);
+    overflow: auto;
+}
+
+h1,
+h3,
+h2,
+h4,
+h5 {
+    font-family: "Pixelify Sans";
+    font-style: normal;
+    font-weight: 400;
+}
+
+h1 {
+    color: var(--white);
+    font-size: 20px;
+    line-height: 28.8px;
+    margin: 0 auto;
+    -webkit-font-smoothing: none;
+}
+
+h3 {
+    color: var(--black);
+    font-size: 16px;
+    /* -webkit-font-smoothing: none; */
+}
+
+h4 {
+    display: inline-block;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    color: var(--black);
+    font-size: 12px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 37px;
+    width: 100%;
+    color: var(--white);
+    position: relative;
+    -webkit-app-region: drag;
+}
+
+.page-buttons,
+.button-container {
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    top: 8.5px;
+    gap: 6px;
+    --webkit-app-region: no-drag;
+}
+
+.page-buttons {
+    left: 11px;
+}
+
+.button-container {
+    right: 11px;
+}
+
+.home,
+.settings,
+.button-container button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--border);
+    -webkit-app-region: no-drag;
+}
+
+.home img,
+.settings img,
+.button-container button img {
+    width: 20px;
+    height: 20px;
+}
