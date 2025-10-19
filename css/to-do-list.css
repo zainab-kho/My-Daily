@@ -1,0 +1,341 @@
+/* **NOTE: clean up file */
+
+.to-do-body {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.row-panel {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr;
+}
+
+.to-do-list-container {
+    width: 95%;
+    height: 98%;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background: var(--light);
+}
+
+.date {
+    display: inline-flex;
+    margin: 10px;
+    padding: 0px 18px 0px 17px;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    border: 1px solid var(--border);
+}
+
+.date h4 {
+    color: var(--border);
+    font-size: 14px;
+}
+
+.goals-container {
+    width: 100%;
+    height: 33%;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.goals-container h4 {
+    color: var(--border);
+    margin: 0 auto;
+    height: auto;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.notes-container {
+    width: 200px;
+    height: 200px;
+    margin-top: 14px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    background: var(--light);
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-container h4 {
+    font-size: 14px;
+    color: var(--border);
+    margin: 7px;
+    height: auto;
+}
+
+.progress-graph-container {
+    width: 150px;
+    height: 92%;
+    margin-top: 14px;
+    margin-left: 15px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todo-tasks {
+    height: 264px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 3px;
+    overflow: scroll;
+}
+
+.task-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 5px;
+}
+
+.goal-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 3px;
+    height: 70%;
+
+}
+
+.goal-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 7px;
+}
+
+.goal-box,
+.placeholder-box,
+.todo-box {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--border);
+    cursor: pointer;
+}
+
+
+.goal-input {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 19px;
+    font-size: 14px;
+}
+
+.placeholder-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 5px;
+    visibility: hidden;
+}
+
+.placeholder-input {
+    visibility: hidden;
+}
+
+.task-list-wrapper:hover .placeholder-box {
+    visibility: visible;
+    opacity: 0.3;
+}
+
+.task-input {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    min-height: 19px;
+    font-size: 14px;
+}
+
+#notes-area {
+    margin: 0 auto;
+    width: 90%;
+    height: 75%;
+    outline: none;
+    font-size: 13px;
+    overflow: scroll;
+    line-height: 18px;
+}
+
+.footer {
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#prev-page,
+#next-page {
+    width: 50px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border: 1px solid var(--border);
+    background-color: var(--darkbackground);
+    color: white;
+    cursor: pointer;
+}
+
+/* **TODO: Clear page info */
+.clear-page {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border: 1.5px solid var(--border);
+    width: 102px;
+    height: 16px;
+    font-size: 13px;
+    color: var(--border);
+    cursor: pointer;
+}
+
+.clear-page:hover {
+    color: var(--border);
+    background-color: var(--darkbackground);
+}
+
+.undo-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px solid var(--border);
+    width: 102px;
+    height: 16px;
+    font-size: 13px;
+    color: var(--border);
+    background: linear-gradient(to left, var(--lighterbackground) 50%, var(--darkbackground) 50%);
+    background-size: 200% 100%;
+    background-position: right;
+    cursor: pointer;
+    animation: undoTimer 30s linear forwards;
+    animation-play-state: running;
+}
+
+@keyframes undoTimer {
+    from {
+        background-position: left;
+    }
+
+    to {
+        background-position: right;
+    }
+}
+
+.task-container.checked-container {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+
+.task-container.checked-container .task-input {
+    text-decoration: line-through;
+}
+
+.todo-tasks.mouse-still .placeholder-box {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.progress-graph-container p {
+    font-size: 13px;
+    color: var(--darkbackground);
+    margin-bottom: 10px;
+}
+
+.progress-ring-bg,
+.progress-ring-fill {
+    fill: none;
+    stroke-width: 15;
+}
+
+.progress-ring-bg {
+    stroke: var(--border);
+    /* background ring */
+    opacity: 0.3;
+}
+
+.progress-ring-fill {
+    stroke: var(--border);
+    stroke-dasharray: 408;
+    /* 2πr ≈ 2 * 3.14 * 65 */
+    stroke-dashoffset: 408;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    transition: stroke-dashoffset 0.4s ease;
+}
+
+.task-list-wrapper {
+    padding-bottom: 10px;
+    height: auto;
+}
+
+.checkbox {
+    margin: 0;
+    border: 1.5px solid var(--border);
+    background: none;
+    color: var(--border);
+    font-size: 16px;
+    /*  // small enough to fit in the box */
+    line-height: 14px;
+    /* // vertically center the checkmark */
+    text-align: center;
+    /*   // horizontally center the checkmark */
+    cursor: pointer;
+}
+
+.task-container.dragging {
+    opacity: 0.5;
+}
+
+.goals-progress-bar {
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.goals-progress-bar-outer {
+width: 110px;
+height: 12px;
+  /* width: 75%; */
+  border: 1.5px solid var(--border);
+  background-color: var(--lightbackground);
+  overflow: hidden;
+  /* border-radius: 10px; */
+  /* box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); */
+}
+
+.goals-progress-bar-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--border), var(--darkbackground));
+  transition: width 0.4s ease;
+}
+
+.goals-percent {
+  font-size: 10px;
+  margin-left: 5px;
+  text-align: center;
+  transition: color 0.3s ease;
+}

@@ -2,32 +2,61 @@
   "name": "my-daily",
   "productName": "My Daily",
   "version": "1.0.0",
-  "description": "A personal productivity desktop app built with Electron.",
+  "description": "A personal productivity app with a dashboard system that combines a to-do list, habit tracker, and digital journal.",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "start": "NODE_ENV=development electron-forge start",
-    "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish"
+    "package": "electron-forge package"
   },
   "author": {
-    "name": "Zainab Khoshnaw",
-    "email": "khoshnawzainab@gmail.com"
+    "name": "Zainab Khoshnaw"
   },
   "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.8.2",
+    "@electron-forge/maker-deb": "^7.8.2",
+    "@electron-forge/maker-rpm": "^7.8.2",
+    "@electron-forge/maker-squirrel": "^7.8.2",
+    "@electron-forge/maker-zip": "^7.8.2",
+    "electron": "35.0.0"
+  },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1"
   },
-  "devDependencies": {
-    "@electron-forge/cli": "^7.8.2",
-    "@electron-forge/maker-zip": "^7.8.2",
-    "@electron-forge/maker-squirrel": "^7.8.2",
-    "@electron-forge/maker-deb": "^7.8.2",
-    "@electron-forge/maker-rpm": "^7.8.2",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.8.2",
-    "@electron-forge/plugin-fuses": "^7.8.2",
-    "@electron/fuses": "^1.8.0",
-    "electron": "35.0.0",
-    "electron-reload": "^2.0.0-alpha.1"
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "assets/icon"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "platforms": [
+            "win32"
+          ],
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "platforms": [
+            "linux"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "platforms": [
+            "linux"
+          ]
+        }
+      ]
+    }
   }
 }

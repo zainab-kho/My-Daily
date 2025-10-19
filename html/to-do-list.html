@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to-do list</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/to-do-list.css" />
+
+</head>
+
+<body>
+    <div class="window">
+        <header>
+            <div class="page-buttons">
+                <button class="home">
+                    <img src="../assets/home-icon.png">
+                </button>
+                <!-- <button class="settings">
+                    <img src="../assets/settings-icon.png">
+                </button> -->
+            </div>
+            <h1>to-do list</h1>
+            <div class="button-container">
+                <button class="minimize">
+                    <img src="../assets/minimize-icon.png" alt="minimize">
+                </button>
+                <button class="close">
+                    <img src="../assets/close-icon.png" alt="close">
+                </button>
+            </div>
+
+        </header>
+
+        <main>
+            <div class="main">
+                <div class="to-do-body">
+
+                    <!-- to do list container: contains tasks -->
+                    <div class="to-do-list-container">
+                        <div class="date">
+                            <h4></h4>
+                        </div>
+
+                        <div class="todo-tasks">
+                            <div class="task-list-wrapper">
+                                <div class="placeholder-container">
+                                    <div class="placeholder-box"></div>
+                                    <input type="text" id="todo-input" autocomplete="off" autocorrect="off"
+                                        autocapitalize="off" spellcheck="false" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="right-container">
+                        <!-- goals container: allows users to input 3 goals daily -->
+                        <div class="goals-container">
+                            <h4>goals</h4>
+                            <div class="goal-wrapper">
+                                <div class="goal-container">
+                                    <div class="goal-box"></div>
+                                    <input type="text" class="goal-input"></input>
+                                </div>
+                                <div class="goal-container">
+                                    <div class="goal-box"></div>
+                                    <input type="text" class="goal-input"></input>
+                                </div>
+                                <div class="goal-container">
+                                    <div class="goal-box"></div>
+                                    <input type="text" class="goal-input"></input>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row-panel">
+                            <!-- notes: allows users to write extra notes -->
+                            <div class="notes-container">
+                                <h4>note</h4>
+                                <div id="notes-area" contenteditable="true"></div>
+
+                            </div>
+
+                            <!-- visual progress -->
+                            <div class="progress-graph-container">
+
+                                <p>to-do list progress</p>
+                                <img class="donut-progress" src="../assets/donut-chart/themes/default/progress-0.png"
+                                    alt="progress chart" width="100" height="100">
+
+                                <p>goals</p>
+                                <div class="goals-progress-bar">
+                                    <div class="goals-progress-bar-outer">
+                                        <div class="goals-progress-bar-fill"></div>
+                                    </div>
+
+                                    <div class="goals-percent">0%</div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <button id="prev-page">
+                        <span class="arrow">&lt;</span>
+                    </button>
+                    <div class="clear-page">clear</div>
+                    <button id="next-page">
+                        <span class="arrow">&gt;</span>
+                    </button>
+                </div>
+            </div>
+
+
+
+    </div>
+
+    </div>
+    </main>
+
+    </header>
+
+    <script type="module" src="../js/window-controls.js"></script>
+    <script type="module" src="../js/to-do-list.js"></script>
+
+    <script>
+        document.querySelector('.home').addEventListener('click', () => {
+            window.location.href = "../html/dashboard.html";
+        })
+    </script>
+
+</body>
+
+</html>

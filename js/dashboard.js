@@ -1,24 +1,24 @@
-import './firebase.js';
+// import './firebase.js';
 
-window.electron.onAuthStateChanged((user) => {
-  if (user) {
-    console.log('User is logged in:', user);
-  } else {
-    console.log('User is logged out');
-  }
-});
+// window.electron.onAuthStateChanged((user) => {
+//   if (user) {
+//     console.log('User is logged in:', user);
+//   } else {
+//     console.log('User is logged out');
+//   }
+// });
 
-document.querySelector('.habit-tracker-icon').addEventListener('click', () => {
-  window.location.href = '../html/habits-page.html';
-});
+// document.querySelector('.habit-tracker-icon').addEventListener('click', () => {
+//   window.location.href = '../html/habits-page.html';
+// });
 
 document.querySelector('.to-do-list-icon').addEventListener('click', () => {
-  window.location.href = '../html/to-do.html';
+  window.location.href = '../html/to-do-list.html';
 });
 
-document.querySelector('.journal-icon').addEventListener('click', () => {
-  window.location.href = '../html/journal.html';
-});
+// document.querySelector('.journal-icon').addEventListener('click', () => {
+//   window.location.href = '../html/journal.html';
+// });
 
 document.querySelectorAll(".habit-text").forEach(el => {
   if (el.scrollHeight > el.clientHeight) {

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sign up</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/account-info.css">
+
+</head>
+
+<body>
+  <div class="window">
+    <header>
+      <div class="page-buttons">
+        <button class="home">
+          <img src="../assets/home-icon.png">
+        </button>
+        <button class="settings" style="visibility: hidden;">
+          <img src="../assets/settings-icon.png">
+        </button>
+      </div>
+      <h1>my daily</h1>
+      <div class="button-container">
+        <button class="minimize">
+          <img src="../assets/minimize-icon.png" alt="minimize">
+        </button>
+        <button class="close">
+          <img src="../assets/close-icon.png" alt="close">
+        </button>
+      </div>
+    </header>
+
+  </div>
+
+  <main>
+
+    <div class="signup-window">
+
+      <h3>sign up</h3>
+
+      <form id="form" novalidate>
+        <div class="signup-info">
+
+          <div class="input-control">
+            <input type="email" id="user-email" placeholder="enter email">
+            <div class="error" style="display: none;"></div>
+          </div>
+
+          <div class="input-control">
+            <input type="password" id="user-password" placeholder="enter password">
+            <div class="error" style="display: none;"></div>
+          </div>
+
+          <div class="input-control">
+            <input type="password" id="user-confirm-password" placeholder="confirm password">
+            <div class="error" style="display: none;"></div>
+          </div>
+
+          <button class="submit-signup">create account</button>
+
+      </form>
+
+      <div class="go-to-login">
+        <h4>already have an account? </h4>
+        <button class="login-btn">log in</button>
+      </div>
+    </div>
+
+    </div>
+
+  </main>
+
+  <script type="module" src="../js/window-controls.js"></script>
+  <script type="module" src="../js/firebase.js"></script>
+  <script type="module" src="../js/signup.js"></script>
+  <script>
+
+    window.onload = function () {
+      // make window small
+      window.resizeTo(350, 400);
+    }
+
+    import { signUpUser } from './firebase.js';
+
+    const form = document.getElementById('form');
+    const email = document.getElementById('user-email');
+    const password = document.getElementById('user-password');
+    const confirmPassword = document.getElementById('user-confirm-password');
+
+    const setError = (element, message) => {
+      const inputControl = element.parentElement;
+      const errorDisplay = inputControl.querySelector('.error');
+
+      errorDisplay.innerText = message;
+      errorDisplay.style.display = 'block';
+      inputControl.classList.add('error');
+      inputControl.classList.remove('success')
+    }
+
+    const setSuccess = element => {
+      const inputControl = element.parentElement;
+      const errorDisplay = inputControl.querySelector('.error');
+
+      errorDisplay.innerText = '';
+      errorDisplay.style.display = 'none';
+      inputControl.classList.add('success');
+      inputControl.classList.remove('error');
+    };
+
+    function isValidEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      let isValid = re.test(String(email.value).toLowerCase());
+
+      if (email.value === '') {
+        setError(email, 'email is required');
+        return false;
+      }
+
+      if (!isValid) {
+        setError(email, 'please provide a valid email address.');
+        return false;
+      };
+
+      setSuccess(email);
+      return true;
+    }
+
+    function checkPassword(password) {
+      const passwordText = password.value.trim();
+      const minLength = 8;
+      const hasUpperCase = /[A-Z]/.test(passwordText);
+      const hasLowerCase = /[a-z]/.test(passwordText);
+      const hasNumber = /[0-9]/.test(passwordText);
+
+      // ensure password is not null
+      if (passwordText === '') {
+        setError(password, 'password is required');
+        return false;
+      }
+
+      // check password conditions
+      if (passwordText.length < minLength) {
+        setError(password, 'password must be at least 8 characters long');
+        return false;
+      }
+
+      if (!hasUpperCase) {
+        setError(password, 'password must contain at least one uppercase letter');
+        return false;
+      }
+
+      if (!hasLowerCase) {
+        setError(password, 'password must contain at least one lowercase letter');
+        return false;
+      }
+
+      if (!hasNumber) {
+        setError(password, 'password must contain at least one number');
+        return false;
+      }
+
+      setSuccess(password);
+
+      return true;
+    }
+
+    function checkConfirmPassword(password, confirmPassword) {
+      const passwordText = password.value.trim();
+      const confirmPasswordText = confirmPassword.value.trim();
+
+      // ensure confirm password is not null
+      if (confirmPasswordText === '') {
+        setError(confirmPassword, 'password is required');
+        return false;
+      }
+
+      if (passwordText != confirmPasswordText) {
+        setError(confirmPassword, 'passwords do not match');
+        return false;
+      }
+
+      setSuccess(confirmPassword);
+      return true;
+    }
+
+
+
+    const validateInputs = () => {
+      let accoutIsValid = true;
+
+      if (!isValidEmail(email)) {
+        accoutIsValid = false;
+      }
+
+      if (!checkPassword(password)) {
+        accoutIsValid = false;
+      }
+
+      if (!checkConfirmPassword(password, confirmPassword)) {
+        accoutIsValid = false;
+      }
+
+      return accoutIsValid;
+    };
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      console.log('validating input');
+      if (validateInputs()) {
+        console.log('signing up!');
+
+        signUpUser(email.value.trim(), password.value.trim());
+      }
+    });
+
+    document.querySelector('.login-btn').addEventListener('click', (e) => {
+      e.preventDefault(); // stops any unintended form submission
+      window.location.href = '../html/login.html';
+    });
+
+  </script>
+
+</body>
+
+</html>

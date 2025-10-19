@@ -64,11 +64,11 @@ getDayOfYear: (date) => {
 }
 
 document.querySelector('.close').addEventListener('click', () => {
-  window.electron.closeApp();
+  window.electronAPI.closeApp();
 });
 
 document.querySelector('.minimize').addEventListener('click', () => {
-  window.electron.minimizeApp();
+  window.electronAPI.minimizeApp();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
