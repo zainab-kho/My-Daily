@@ -121,6 +121,12 @@ function saveTask(id, container, input, check) {
   state.isDirty = true;
 }
 
+function resetClearButton() {
+  clearTimeout(state.undoTimer);  // cancel any pending undo timeout
+  dom.page.clearButton.classList.remove('undo-button');
+  dom.page.clearButton.textContent = 'clear';
+}
+
 function clearPage() {
   state.tempPageData = {
     tasks: dom.todo.tasks.map(task => ({
@@ -365,6 +371,7 @@ function getDragAfterElement(container, y) {
 // --- navigation ---
 function goToNextDay() {
   triggerAutoSave();
+  resetClearButton();
   resetHover();
   let dateObj = ui.formatStringToDate(state.currentDate);
   dateObj.setDate(dateObj.getDate() + 1);
@@ -382,6 +389,7 @@ function goToNextDay() {
 
 function goToPrevDay() {
   triggerAutoSave();
+  resetClearButton();
   resetHover();
   let dateObj = ui.formatStringToDate(state.currentDate);
   dateObj.setDate(dateObj.getDate() - 1);
@@ -418,24 +426,65 @@ dom.todo.wrapper.addEventListener('click', e => {
 });
 
 dom.page.clearButton.addEventListener('click', () => {
+  // if currently in undo state → restore
   if (dom.page.clearButton.classList.contains('undo-button')) {
+    clearTimeout(state.undoTimer);
     dom.page.clearButton.classList.remove('undo-button');
     dom.page.clearButton.textContent = 'clear';
-    clearTimeout(state.undoTimer);
+
+    // restore from temp
     restorePageFromTemp();
+
+    // push restored data back to firebase
+    if (state.currentDate && state.tempPageData) {
+      state.allData[state.currentDate] = {
+        tasks: state.tempPageData.tasks || [],
+        goals: state.tempPageData.goals || [],
+        text: state.tempPageData.text || '',
+      };
+      saveToDoList({ 
+        tasks: state.tempPageData.tasks || [],
+        goals: state.tempPageData.goals || [],
+        text: state.tempPageData.text || '',
+        day: state.currentDate 
+      });
+    }
     return;
   }
+
+  // clear timeout if undo timer exists
   clearTimeout(state.undoTimer);
-  dom.page.clearButton.classList.remove('undo-button');
-  void dom.page.clearButton.offsetWidth;
+
+  // store current state for undo
+  state.tempPageData = {
+    tasks: dom.todo.tasks.map(t => ({ id: t.id, text: t.input.value, check: t.check })),
+    goals: Array.from(dom.goals.inputs).map((input, i) => ({
+      id: `goal-${i+1}`,
+      text: input.value.trim(),
+      check: input.closest('.goal-container')?.classList.contains('checked-container') || false,
+    })),
+    text: dom.note.textArea.innerText.trim(),
+  };
+
+  // update DOM
+  clearPage();
+
+  // immediately clear firebase
+  if (state.currentDate) {
+    state.allData[state.currentDate] = { tasks: [], goals: [], text: '' };
+    saveToDoList({ tasks: [], goals: [], text: '', day: state.currentDate });
+  }
+
+  // set undo button state
+  void dom.page.clearButton.offsetWidth; // force reflow
   dom.page.clearButton.classList.add('undo-button');
   dom.page.clearButton.textContent = 'undo';
-  clearPage();
+
+  // set timer to finalize clear after 30s
   state.undoTimer = setTimeout(() => {
     dom.page.clearButton.classList.remove('undo-button');
     dom.page.clearButton.textContent = 'clear';
-    state.isDirty = true;
-    triggerAutoSave(true);
+    state.isDirty = true; // optional: trigger autosave for other changes
   }, 30000);
 });
 
