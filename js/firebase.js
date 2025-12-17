@@ -61,11 +61,12 @@ onAuthStateChanged(auth, async (user) => {
   if (user && isAuthPage) {
     // logged in → go to dashboard
     redirectInProgress = true;
+    await cleanupOldDailyTasks();  // cleanup when user logs in
     window.location.replace("../dashboard.html");
   }
 
   if (!user && !isAuthPage) {
-    // logged out → go to login page
+    // logged out - go to login page
     redirectInProgress = true;
     window.location.replace("./auth/login.html");
   }
@@ -140,7 +141,43 @@ export function loadToDoPage() {
   });
 }
 
-// --- (keep your journal + pixel logic here unchanged) ---
+// --------------------------------------------------
+// cleanup data functions
+// --------------------------------------------------
+function getDate90DaysAgo() {
+  const d = new Date();
+  d.setDate(d.getDate() - 90);
+  return d.toISOString().slice(0, 10); // yyyy-mm-dd
+}
+
+export async function cleanupOldDailyTasks() {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const emailPath = getUserEmail();
+  const baseRef = ref(db, `Users/${emailPath}/DailyTasks`);
+  const snapshot = await get(baseRef);
+
+  if (!snapshot.exists()) return;
+
+  const data = snapshot.val();
+  const cutoff = getDate90DaysAgo();
+
+  const deletions = [];
+
+  Object.keys(data).forEach(day => {
+    if (day < cutoff) {
+      deletions.push(remove(ref(db, `Users/${emailPath}/DailyTasks/${day}`)));
+    }
+  });
+
+  if (deletions.length > 0) {
+    await Promise.all(deletions);
+    console.log(`🧹 cleaned ${deletions.length} old days`);
+  }
+}
+
+// --- journal + pixel logic ---
 
 // --------------------------------------------------
 // internal ref helpers
